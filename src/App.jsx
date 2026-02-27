@@ -1235,7 +1235,7 @@ export default function App() {
                   <div>
                     <div className="contact-label">Email</div>
                     <div className="contact-value">
-                      <a href="mailto:caseyhath@outlook.com">casseyhath@outlook.com</a>
+                      <a href="mailto:caseyhath@outlook.com">caseyhath@outlook.com</a>
                     </div>
                   </div>
                 </div>
