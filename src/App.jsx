@@ -1,54 +1,166 @@
 import { useState, useEffect, useRef } from "react";
 
-const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Contact"];
+const NAV_LINKS = ["Home", "About", "Skills", "Projects", "CAD Work", "Contact"];
 
 const SKILLS = [
+  // Nuclear Simulation Tools
   { name: "RELAP5", level: 95, category: "Simulation" },
-  { name: "MCNP6", level: 92, category: "Simulation" },
+  { name: "TRACE", level: 92, category: "Simulation" },
+  { name: "MCNP6", level: 93, category: "Simulation" },
   { name: "SCALE/TRITON", level: 90, category: "Simulation" },
-  { name: "TRACE", level: 88, category: "Simulation" },
-  { name: "Reactor Safety Analysis", level: 97, category: "Engineering" },
-  { name: "Thermal-Hydraulic Analysis", level: 95, category: "Engineering" },
-  { name: "Radiation Transport", level: 93, category: "Engineering" },
-  { name: "NRC Regulatory Compliance", level: 96, category: "Regulatory" },
-  { name: "Project Management", level: 90, category: "Leadership" },
-  { name: "Multi-disciplinary Team Leadership", level: 92, category: "Leadership" },
-  { name: "Environmental Remediation", level: 87, category: "Engineering" },
-  { name: "Technical Report Writing", level: 94, category: "Communication" },
+  // Nuclear Engineering
+  { name: "Reactor Core Physics & Neutronics", level: 97, category: "Engineering" },
+  { name: "Thermal-Hydraulic Transient Analysis (LOCA)", level: 96, category: "Engineering" },
+  { name: "Fuel Depletion & Reactivity Control", level: 93, category: "Engineering" },
+  { name: "Radiation Shielding Design", level: 91, category: "Engineering" },
+  { name: "Probabilistic Risk Assessment (PRA)", level: 89, category: "Engineering" },
+  { name: "Radioactive Waste Management", level: 88, category: "Engineering" },
+  // Regulatory & Safety
+  { name: "NRC 10 CFR Part 50/52 Compliance", level: 97, category: "Regulatory" },
+  { name: "Safety Analysis Reports (SAR/LRA)", level: 95, category: "Regulatory" },
+  { name: "NEPA / Environmental Impact Statements", level: 92, category: "Regulatory" },
+  { name: "Emergency Operating Procedures (EOPs)", level: 90, category: "Regulatory" },
+  // CAD & Design Tools (for AI Trainer role)
+  { name: "SolidWorks", level: 85, category: "CAD & Design" },
+  { name: "AutoCAD Mechanical", level: 80, category: "CAD & Design" },
+  { name: "AutoDesk Inventor", level: 78, category: "CAD & Design" },
+  { name: "FreeCAD / FreeCAD BIM", level: 75, category: "CAD & Design" },
+  { name: "Rhino 3D", level: 72, category: "CAD & Design" },
+  // Software & Programming
+  { name: "Python (NumPy / Pandas)", level: 82, category: "Software" },
+  { name: "MATLAB / Simulink", level: 80, category: "Software" },
+  // Leadership & Communication
+  { name: "PMP-Certified Project Management", level: 93, category: "Leadership" },
+  { name: "Multi-disciplinary Team Leadership", level: 94, category: "Leadership" },
+  { name: "Technical Report Writing", level: 96, category: "Leadership" },
+  { name: "Vendor Oversight & Model Validation", level: 90, category: "Leadership" },
 ];
 
 const PROJECTS = [
   {
-    title: "Advanced Reactor Kinetics Modeling",
+    title: "SLR Safety Analysis — Dual-Unit PWR ($2.5M)",
     description:
-      "Led high-fidelity simulation of complex reactor kinetics and thermal-hydraulic transients using RELAP5 and TRACE for a next-generation reactor design program.",
-    tags: ["RELAP5", "TRACE", "Reactor Kinetics"],
-    image: null, // Replace with your image path e.g. "/images/project1.jpg"
+      "Directed a $2.5 million Subsequent License Renewal safety analysis project for a dual-unit Pressurized Water Reactor plant at Enercon Services. Led multi-disciplinary teams through rigorous NRC review, resulting in successful approval for a 20-year license extension.",
+    tags: ["RELAP5", "NRC", "License Renewal", "PWR", "Safety Analysis"],
+    image: null,
+    placeholder: "⚛️",
+  },
+  {
+    title: "Extended Power Uprate — Thermal-Hydraulic Analysis",
+    description:
+      "Conducted RELAP5 modeling for a 5% Extended Power Uprate (EPU) at a commercial nuclear facility. Identified and mitigated thermal-hydraulic bottlenecks in the primary coolant system, increasing plant output while fully maintaining required safety margins.",
+    tags: ["RELAP5", "TRACE", "Power Uprate", "Thermal-Hydraulic"],
+    image: null,
     placeholder: "🔬",
   },
   {
-    title: "NRC Safety Analysis Report",
+    title: "AP1000® Next-Gen Fuel Cycle Design — Westinghouse",
     description:
-      "Directed the synthesis of multi-dimensional simulation data into a comprehensive safety analysis report submitted to the Nuclear Regulatory Commission, achieving full compliance.",
-    tags: ["NRC", "Safety Analysis", "Regulatory"],
+      "Spearheaded the design of a high-burnup fuel cycle model at Westinghouse Electric Company for AP1000® PWRs using MCNP6 and SCALE/TRITON. Achieved a 15% improvement in fuel cycle efficiency and a 10% reduction in radioactive waste generation across client utilities.",
+    tags: ["MCNP6", "SCALE/TRITON", "AP1000", "Fuel Cycle", "Westinghouse"],
     image: null,
-    placeholder: "📋",
+    placeholder: "🏭",
   },
   {
-    title: "Environmental Remediation Program",
+    title: "Radiation Shielding Design Review",
     description:
-      "Managed a large-scale environmental remediation project, coordinating multi-disciplinary engineering teams to achieve remediation targets ahead of schedule.",
-    tags: ["Project Management", "Remediation", "Leadership"],
+      "Led a cross-functional team at Westinghouse in reviewing and optimizing radiation shielding for a new reactor containment design. Ensured compliance with international safety standards and reduced projected worker dose rates by 20%.",
+    tags: ["MCNP6", "Shielding Design", "Safety", "Regulatory"],
+    image: null,
+    placeholder: "🛡️",
+  },
+  {
+    title: "Vogtle 3 & 4 — Initial Core Loading Support",
+    description:
+      "Provided technical oversight for initial core loading procedures for new reactor units at Plant Vogtle (Southern Company). Ensured 100% compliance with all safety protocols with zero incidents during this critical commissioning phase.",
+    tags: ["Core Loading", "Southern Company", "Safety Protocols", "Plant Vogtle"],
+    image: null,
+    placeholder: "🌐",
+  },
+  {
+    title: "Thermal Discharge Environmental Study",
+    description:
+      "Conducted a multi-year environmental impact study on thermal discharge into local water bodies at Plant Vogtle. Data-driven findings led to improved cooling tower protocols, reducing thermal environmental impact by 15%.",
+    tags: ["Environmental Analysis", "NEPA", "Thermal Discharge", "EIS"],
     image: null,
     placeholder: "🌍",
   },
+];
+
+// CAD Work samples — the technical drawings for the AI Trainer role
+// These images should be placed in public/images/cad/
+const CAD_WORK = [
   {
-    title: "Radiation Transport Study",
+    title: "Supermarket Display Unit",
     description:
-      "Conducted advanced radiation transport modeling using MCNP6 and SCALE/TRITON to validate shielding designs and ensure personnel safety across multiple facility upgrades.",
-    tags: ["MCNP6", "SCALE/TRITON", "Radiation"],
-    image: null,
-    placeholder: "⚛️",
+      "Multi-view orthographic technical drawing of a commercial supermarket display rack, including front elevation, side section, and isometric views with full dimensioning.",
+    tags: ["Technical Drawing", "Orthographic Views", "Dimensioning"],
+    image: "/public/images/supermarket_display_unit.jpeg",
+    placeholder: "🗂️",
+    note: "Add image: /images/supermarket-display-unit.jpg",
+  },
+  {
+    title: "Standard Distribution Board",
+    description:
+      "Detailed CAD drawing of an electrical standard distribution board, showing front panel, side cross-section, and component layout with precise measurements.",
+    tags: ["Electrical CAD", "Distribution Board", "Technical Drawing"],
+    image: "/public/images/standard_distribution_board.jpeg", // Set to "/images/cad/sdb-standard.jpg"
+    placeholder: "⚡",
+    note: "Add image: /images/cad/sdb-standard.jpg",
+  },
+  {
+    title: "6-Way Surface Distribution Board (6-W SDB)",
+    description:
+      "Complete multi-angle CAD documentation for a 6-way surface-mounted distribution board, including internal layout, cable entry positions, and mounting specifications.",
+    tags: ["SDB", "Electrical Engineering", "Multi-view CAD"],
+    image: "/public/images/6-W_SDB.jpeg", // Set to "/images/cad/6w-sdb.jpg"
+    placeholder: "🔌",
+    note: "Add image: /images/cad/6w-sdb.jpg",
+  },
+  {
+    title: "Structural Panel Assembly",
+    description:
+      "Technical assembly drawing of a structural panel system with mounting bracket details, hole patterns, and hardware specifications for industrial installation.",
+    tags: ["Structural CAD", "Assembly Drawing", "Panel Design"],
+    image: "/public/images/structural_panel_assembly.jpeg", // Set to "/images/cad/panel-assembly.jpg"
+    placeholder: "🔩",
+    note: "Add image: /images/cad/panel-assembly.jpg",
+  },
+  {
+    title: "Light Duty Warehouse Rack",
+    description:
+      "3D isometric CAD model of a light-duty warehouse storage rack, detailing steel frame construction, shelf tier spacing, and load-bearing structural connections.",
+    tags: ["3D Modeling", "Storage Systems", "Structural Design"],
+    image: "/public/images/light_duty_rack.jpeg", // Set to "/images/cad/warehouse-rack.jpg"
+    placeholder: "🏗️",
+    note: "Add image: /images/cad/warehouse-rack.jpg",
+  },
+  {
+    title: "Hospital Bed",
+    description:
+      "Detailed 3D CAD model of a medical-grade hospital bed featuring articulating frame, safety side rails, castored base, and ergonomic mattress platform geometry.",
+    tags: ["Medical Equipment", "3D Modeling", "Product Design"],
+    image: "/public/images/hospital_bed.jpeg", // Set to "/images/cad/hospital-bed.jpg"
+    placeholder: "🏥",
+    note: "Add image: /images/cad/hospital-bed.jpg",
+  },
+  {
+    title: "Wall Mount Network Server Rack",
+    description:
+      "Isometric 3D render of a wall-mounted network server enclosure with ventilated top panel, glazed front door, and internal rack-unit spacing for equipment mounting.",
+    tags: ["Enclosure Design", "IT Infrastructure", "3D Modeling"],
+    image: "/public/images/wall_mount.jpeg",
+    placeholder: "🖥️",
+    note: "Add image: /images/cad/server-rack.jpg",
+  },
+  {
+    title: "Electric Socket Column",
+    description:
+      "3D CAD model of a floor-standing electric socket distribution column with modular panel slots, cable management channels, and a robust structural base frame.",
+    tags: ["Electrical Infrastructure", "Product Design", "3D Modeling"],
+    image: "/public/images/electric_socket.jpeg",
+    placeholder: "🔋",
+    note: "Add image: /images/cad/socket-column.jpg",
   },
 ];
 
@@ -148,8 +260,9 @@ export default function App() {
     Simulation: "#00d4ff",
     Engineering: "#00ffaa",
     Regulatory: "#ff9500",
+    "CAD & Design": "#ff6b9d",
+    Software: "#ffdd00",
     Leadership: "#bf7fff",
-    Communication: "#ff6b9d",
   };
 
   return (
@@ -919,9 +1032,9 @@ export default function App() {
             <style>{`@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }`}</style>
             <div className="hero-badge">Senior Nuclear Engineer</div>
             <h1 className="hero-name">Cassey<br />Hathcock</h1>
-            <p className="hero-title">Nuclear Reactor Design · Safety Analysis · Project Management</p>
+            <p className="hero-title">Nuclear Reactor Design · Safety Analysis · CAD & Technical Drawing</p>
             <p className="hero-desc">
-              Distinguished engineer with 14+ years of expertise in nuclear reactor design, advanced safety analysis, and federal regulatory compliance — driving next-generation nuclear innovation.
+              Distinguished Senior Nuclear Engineer & PMP-certified Project Manager with 14+ years across Enercon Services, Westinghouse Electric, and Southern Company — specializing in reactor design, NRC regulatory compliance, and high-fidelity simulation.
             </p>
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => scrollTo("Contact")}>Get In Touch</button>
@@ -933,8 +1046,8 @@ export default function App() {
             <div className="profile-ring">
               <div className="profile-img-wrapper">
                 {/* REPLACE: Set image path below, e.g. src="/images/cassey-profile.jpg" */}
-                {false ? (
-                  <img src="/images/cassey-profile.jpg" alt="Cassey Hathcock" />
+                {true ? (
+                  <img src="/public/images/profile_picture.png" alt="Cassey Hathcock" />
                 ) : (
                   <div className="profile-placeholder">
                     <span>👤</span>
@@ -960,8 +1073,8 @@ export default function App() {
             <AnimatedSection>
               <div className="about-image-box">
                 {/* REPLACE: Set image path below, e.g. src="/images/cassey-about.jpg" */}
-                {false ? (
-                  <img className="about-img" src="/images/cassey-about.jpg" alt="Cassey Hathcock" />
+                {true ? (
+                  <img className="about-img" src="/public/images/about_me.png" alt="Cassey Hathcock" />
                 ) : (
                   <div className="about-img-placeholder">
                     <span>🖼️</span>
@@ -974,13 +1087,13 @@ export default function App() {
             <AnimatedSection>
               <div className="about-text">
                 <p>
-                  Distinguished Senior Nuclear Engineer and Project Manager with over <strong style={{ color: "var(--accent)" }}>14 years</strong> of comprehensive experience in nuclear reactor design, advanced safety analysis, and federal regulatory compliance.
+                  Distinguished Senior Nuclear Engineer and PMP-certified Project Manager with over <strong style={{ color: "var(--accent)" }}>14 years</strong> of experience spanning Enercon Services, Westinghouse Electric Company, and Southern Company (Plant Vogtle).
                 </p>
                 <p>
-                  Expert in utilizing high-fidelity simulation tools — including <strong style={{ color: "var(--accent-2)" }}>RELAP5, MCNP6, SCALE/TRITON,</strong> and <strong style={{ color: "var(--accent-2)" }}>TRACE</strong> — to model complex reactor kinetics, thermal-hydraulic transients, and radiation transport.
+                  Expert in high-fidelity simulation tools — <strong style={{ color: "var(--accent-2)" }}>RELAP5, MCNP6, SCALE/TRITON, TRACE</strong> — for reactor kinetics, thermal-hydraulic transient analysis, and radiation transport. Also proficient in <strong style={{ color: "var(--accent-2)" }}>SolidWorks, AutoCAD Mechanical, AutoDesk Inventor,</strong> and <strong style={{ color: "var(--accent-2)" }}>FreeCAD</strong> for technical CAD and engineering drawing.
                 </p>
                 <p>
-                  Proven track record in directing multi-disciplinary engineering teams, managing large-scale environmental remediation projects, and synthesizing multi-dimensional data into high-stakes technical reports for the <strong style={{ color: "var(--accent)" }}>Nuclear Regulatory Commission (NRC)</strong>.
+                  Holds a <strong style={{ color: "var(--accent)" }}>Master of Science in Nuclear Engineering</strong> from NC State University (2011) and a B.S. Summa Cum Laude (2009), Tau Beta Pi Honor Society. Licensed <strong style={{ color: "var(--accent)" }}>Professional Engineer (PE)</strong> in Oklahoma & North Carolina, <strong style={{ color: "var(--accent)" }}>PMP</strong>, and <strong style={{ color: "var(--accent)" }}>Certified Safety Professional (CSP)</strong>.
                 </p>
                 <div className="stats-row">
                   <div className="stat-card">
@@ -988,12 +1101,12 @@ export default function App() {
                     <div className="stat-label">Years Experience</div>
                   </div>
                   <div className="stat-card">
-                    <div className="stat-num">4</div>
-                    <div className="stat-label">Simulation Tools</div>
+                    <div className="stat-num">PE</div>
+                    <div className="stat-label">Licensed Engineer</div>
                   </div>
                   <div className="stat-card">
-                    <div className="stat-num">NRC</div>
-                    <div className="stat-label">Certified</div>
+                    <div className="stat-num">PMP</div>
+                    <div className="stat-label">Certified PM</div>
                   </div>
                 </div>
               </div>
@@ -1043,17 +1156,6 @@ export default function App() {
             {PROJECTS.map((project, i) => (
               <AnimatedSection key={i}>
                 <div className="project-card">
-                  {project.image ? (
-                    <img className="project-img" src={project.image} alt={project.title} />
-                  ) : (
-                    <div className="project-img-placeholder">
-                      <span>{project.placeholder}</span>
-                      <span>ADD PROJECT IMAGE</span>
-                      <span style={{ fontSize: "0.65rem", opacity: 0.4 }}>
-                        Set project.image in PROJECTS array
-                      </span>
-                    </div>
-                  )}
                   <div className="project-body">
                     <h3 className="project-title">{project.title}</h3>
                     <p className="project-desc">{project.description}</p>
@@ -1070,11 +1172,51 @@ export default function App() {
         </div>
       </section>
 
+      {/* CAD WORK */}
+      <section id="cad work">
+        <div className="section-inner">
+          <AnimatedSection>
+            <p className="section-label">// 04. cad & technical drawing</p>
+            <h2 className="section-title">CAD Work Samples</h2>
+            <div className="section-divider" />
+            <p style={{ color: "var(--text-secondary)", marginBottom: "2.5rem", maxWidth: "680px", fontSize: "1rem", fontWeight: 300 }}>
+              Technical CAD drawings produced using AutoCAD Mechanical and SolidWorks — demonstrating precision drafting, multi-view orthographic documentation, and engineering drawing standards relevant to AI training data creation and validation.
+            </p>
+          </AnimatedSection>
+          <div className="projects-grid">
+            {CAD_WORK.map((work, i) => (
+              <AnimatedSection key={i}>
+                <div className="project-card">
+                  {work.image ? (
+                    <img className="project-img" src={work.image} alt={work.title} />
+                  ) : (
+                    <div className="project-img-placeholder">
+                      <span>{work.placeholder}</span>
+                      <span>ADD CAD IMAGE</span>
+                      <span style={{ fontSize: "0.62rem", opacity: 0.4 }}>{work.note}</span>
+                    </div>
+                  )}
+                  <div className="project-body">
+                    <h3 className="project-title">{work.title}</h3>
+                    <p className="project-desc">{work.description}</p>
+                    <div className="project-tags">
+                      {work.tags.map((tag) => (
+                        <span key={tag} className="tag" style={{ borderColor: "rgba(255,107,157,0.4)", color: "#ff6b9d", background: "rgba(255,107,157,0.05)" }}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact">
         <div className="section-inner">
           <AnimatedSection>
-            <p className="section-label">// 04. contact</p>
+            <p className="section-label">// 05. contact</p>
             <h2 className="section-title">Get In Touch</h2>
             <div className="section-divider" />
           </AnimatedSection>
@@ -1098,10 +1240,19 @@ export default function App() {
                   </div>
                 </div>
                 <div className="contact-info-item">
-                  <div className="contact-icon">⚛️</div>
+                  <div className="contact-icon">📞</div>
                   <div>
-                    <div className="contact-label">Specialization</div>
-                    <div className="contact-value">Nuclear Engineering & Project Management</div>
+                    <div className="contact-label">Phone</div>
+                    <div className="contact-value">
+                      <a href="tel:+19182827214">(918) 282-7214</a>
+                    </div>
+                  </div>
+                </div>
+                <div className="contact-info-item">
+                  <div className="contact-icon">🏅</div>
+                  <div>
+                    <div className="contact-label">Certifications</div>
+                    <div className="contact-value">PE (OK & NC) · PMP · CSP</div>
                   </div>
                 </div>
               </div>
@@ -1151,7 +1302,7 @@ export default function App() {
 
       {/* FOOTER */}
       <footer>
-        <span>© 2025 CASSEY HATHCOCK · NUCLEAR ENGINEER · OKLAHOMA CITY, OK</span>
+        <span>© 2025 CASSEY HATHCOCK · SENIOR NUCLEAR ENGINEER & PROJECT MANAGER · OKLAHOMA CITY, OK</span>
       </footer>
     </>
   );
