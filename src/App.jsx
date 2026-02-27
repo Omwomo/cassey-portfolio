@@ -95,7 +95,7 @@ const CAD_WORK = [
     description:
       "Multi-view orthographic technical drawing of a commercial supermarket display rack, including front elevation, side section, and isometric views with full dimensioning.",
     tags: ["Technical Drawing", "Orthographic Views", "Dimensioning"],
-    image: "/public/images/supermarket_display_unit.jpeg",
+    image: "/images/supermarket_display_unit.jpeg",
     placeholder: "🗂️",
     note: "Add image: /images/supermarket-display-unit.jpg",
   },
@@ -104,7 +104,7 @@ const CAD_WORK = [
     description:
       "Detailed CAD drawing of an electrical standard distribution board, showing front panel, side cross-section, and component layout with precise measurements.",
     tags: ["Electrical CAD", "Distribution Board", "Technical Drawing"],
-    image: "/public/images/standard_distribution_board.jpeg", // Set to "/images/cad/sdb-standard.jpg"
+    image: "/images/standard_distribution_board.jpeg", // Set to "/images/cad/sdb-standard.jpg"
     placeholder: "⚡",
     note: "Add image: /images/cad/sdb-standard.jpg",
   },
@@ -113,7 +113,7 @@ const CAD_WORK = [
     description:
       "Complete multi-angle CAD documentation for a 6-way surface-mounted distribution board, including internal layout, cable entry positions, and mounting specifications.",
     tags: ["SDB", "Electrical Engineering", "Multi-view CAD"],
-    image: "/public/images/6-W_SDB.jpeg", // Set to "/images/cad/6w-sdb.jpg"
+    image: "/images/6-W_SDB.jpeg", // Set to "/images/cad/6w-sdb.jpg"
     placeholder: "🔌",
     note: "Add image: /images/cad/6w-sdb.jpg",
   },
@@ -122,7 +122,7 @@ const CAD_WORK = [
     description:
       "Technical assembly drawing of a structural panel system with mounting bracket details, hole patterns, and hardware specifications for industrial installation.",
     tags: ["Structural CAD", "Assembly Drawing", "Panel Design"],
-    image: "/public/images/structural_panel_assembly.jpeg", // Set to "/images/cad/panel-assembly.jpg"
+    image: "/images/structural_panel_assembly.jpeg", // Set to "/images/cad/panel-assembly.jpg"
     placeholder: "🔩",
     note: "Add image: /images/cad/panel-assembly.jpg",
   },
@@ -131,7 +131,7 @@ const CAD_WORK = [
     description:
       "3D isometric CAD model of a light-duty warehouse storage rack, detailing steel frame construction, shelf tier spacing, and load-bearing structural connections.",
     tags: ["3D Modeling", "Storage Systems", "Structural Design"],
-    image: "/public/images/light_duty_rack.jpeg", // Set to "/images/cad/warehouse-rack.jpg"
+    image: "/images/light_duty_rack.jpeg", // Set to "/images/cad/warehouse-rack.jpg"
     placeholder: "🏗️",
     note: "Add image: /images/cad/warehouse-rack.jpg",
   },
@@ -140,7 +140,7 @@ const CAD_WORK = [
     description:
       "Detailed 3D CAD model of a medical-grade hospital bed featuring articulating frame, safety side rails, castored base, and ergonomic mattress platform geometry.",
     tags: ["Medical Equipment", "3D Modeling", "Product Design"],
-    image: "/public/images/hospital_bed.jpeg", // Set to "/images/cad/hospital-bed.jpg"
+    image: "/images/hospital_bed.jpeg", // Set to "/images/cad/hospital-bed.jpg"
     placeholder: "🏥",
     note: "Add image: /images/cad/hospital-bed.jpg",
   },
@@ -149,7 +149,7 @@ const CAD_WORK = [
     description:
       "Isometric 3D render of a wall-mounted network server enclosure with ventilated top panel, glazed front door, and internal rack-unit spacing for equipment mounting.",
     tags: ["Enclosure Design", "IT Infrastructure", "3D Modeling"],
-    image: "/public/images/wall_mount.jpeg",
+    image: "/images/wall_mount.jpeg",
     placeholder: "🖥️",
     note: "Add image: /images/cad/server-rack.jpg",
   },
@@ -158,7 +158,7 @@ const CAD_WORK = [
     description:
       "3D CAD model of a floor-standing electric socket distribution column with modular panel slots, cable management channels, and a robust structural base frame.",
     tags: ["Electrical Infrastructure", "Product Design", "3D Modeling"],
-    image: "/public/images/electric_socket.jpeg",
+    image: "/images/electric_socket.jpeg",
     placeholder: "🔋",
     note: "Add image: /images/cad/socket-column.jpg",
   },
@@ -1047,7 +1047,7 @@ export default function App() {
               <div className="profile-img-wrapper">
                 {/* REPLACE: Set image path below, e.g. src="/images/cassey-profile.jpg" */}
                 {true ? (
-                  <img src="/public/images/profile_picture.png" alt="Cassey Hathcock" />
+                  <img src="/images/profile_picture.png" alt="Cassey Hathcock" />
                 ) : (
                   <div className="profile-placeholder">
                     <span>👤</span>
@@ -1074,7 +1074,7 @@ export default function App() {
               <div className="about-image-box">
                 {/* REPLACE: Set image path below, e.g. src="/images/cassey-about.jpg" */}
                 {true ? (
-                  <img className="about-img" src="/public/images/about_me.png" alt="Cassey Hathcock" />
+                  <img className="about-img" src="/images/about_me.png" alt="Cassey Hathcock" />
                 ) : (
                   <div className="about-img-placeholder">
                     <span>🖼️</span>
